@@ -410,7 +410,7 @@ const DEMO_STEPS = [
 const FAQS = [
   {
     q: "What is Saarthi?",
-    a: "A voice agent that reads a business's own screens and controls, then acts on them directly — built natively on Bolna's voice infrastructure.",
+    a: "Saarthi is companion.py's voice agent — it reads a business's own screens and controls, then acts on them directly, built natively on Bolna's voice infrastructure.",
   },
   {
     q: "Does it take screenshots?",
@@ -418,7 +418,7 @@ const FAQS = [
   },
   {
     q: "What can it actually do today?",
-    a: "Navigate, click, scroll, explain any screen, and resume a flow mid-way — proven on a live demo built on a fictional digital bank.",
+    a: "Navigate, click, scroll, explain any screen, and resume a flow mid-way — proven on BharatBank, a fictional digital bank we built to demo it.",
   },
   {
     q: "Will it ever touch my balance or OTP?",
@@ -430,7 +430,7 @@ const FAQS = [
   },
   {
     q: "Is this live anywhere yet?",
-    a: "It's proven on a live demo, and we're in early conversations with B2B SaaS companies about running real pilots.",
+    a: "It's proven on BharatBank, our live fictional-bank demo, and we're in early conversations with B2B SaaS companies about running real pilots.",
   },
 ];
 
@@ -596,8 +596,8 @@ export default function Home() {
             What Saarthi already does
           </h2>
           <p className="max-w-2xl mb-10" style={{ color: "var(--ink-muted)" }}>
-            Proven on a live demo, not a slide — a fictional digital bank, built to show the
-            mechanism working end to end.
+            Proven on a live demo, not a slide — BharatBank, a fictional digital bank built to
+            show the mechanism working end to end.
           </p>
           <div className="grid sm:grid-cols-2 gap-5">
             {TRACKS.map(({ icon: Icon, title, example, unlocks }, i) => (
@@ -653,8 +653,8 @@ export default function Home() {
               The demo we built
             </h2>
             <p className="max-w-2xl mb-10" style={{ color: "var(--ink-muted)" }}>
-              Demoed live on a fictional digital bank — the same mechanism drops into any
-              cluttered product.
+              Demoed live on BharatBank, a fictional digital bank — the same mechanism drops
+              into any cluttered product.
             </p>
             <div className="grid sm:grid-cols-4 gap-5">
               {DEMO_STEPS.map(({ icon: Icon, tag, title, body }, i) => (
