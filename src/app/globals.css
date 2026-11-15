@@ -49,7 +49,7 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 26s linear infinite;
+  animation: marquee 12s linear infinite;
 }
 
 @keyframes marquee {

@@ -795,14 +795,76 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="py-10" style={{ background: "var(--dark-panel)" }}>
-        <div className="mx-auto max-w-5xl px-6">
-          <p className="font-display italic text-xl mb-6" style={{ color: "var(--gold)" }}>
+      <footer className="pt-16 pb-8" style={{ background: "var(--dark-panel)" }}>
+        <div className="mx-auto max-w-6xl px-6 sm:px-10">
+          <p className="font-display italic text-2xl sm:text-3xl mb-12 max-w-xl" style={{ color: "var(--gold)" }}>
             Built for Bharat&apos;s next billion screens.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-            <span className="text-sm font-bold" style={{ color: "#fff" }}>
-              companion.py
+
+          <div className="grid sm:grid-cols-[2fr_1fr_1fr] gap-10 pb-10 border-b" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+            <div>
+              <span className="flex items-center gap-2 text-base font-bold tracking-tight mb-3" style={{ color: "#fff" }}>
+                <span
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold"
+                  style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
+                >
+                  S
+                </span>
+                Saarthi
+              </span>
+              <p className="text-sm leading-relaxed max-w-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+                A voice agent by companion.py that reads a business&apos;s own screens and acts
+                on them directly — built natively on Bolna&apos;s voice infrastructure.
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
+                Product
+              </p>
+              <ul className="flex flex-col gap-2 text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
+                {NAV_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="hover:text-white transition-colors">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href="https://bharat-bank.onrender.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Live demo
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
+                Contact
+              </p>
+              <ul className="flex flex-col gap-2 text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
+                <li>
+                  <a href="#pilot" className="hover:text-white transition-colors">
+                    Request a pilot
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:hello@companion.py" className="hover:text-white transition-colors">
+                    hello@companion.py
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6">
+            <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
+              © 2026 companion.py. All rights reserved.
             </span>
             <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
               Saarthi — built natively on Bolna voice infrastructure
