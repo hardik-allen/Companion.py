@@ -242,7 +242,7 @@ function HeroArt() {
 }
 
 function Marquee({ items }: { items: string[] }) {
-  const line = items.join("   ·   ") + "   ·   ";
+  const line = Array(3).fill(items.join("   ·   ") + "   ·   ").join("");
   return (
     <div className="marquee-viewport py-4" style={{ background: "var(--dark-panel)" }}>
       <div className="marquee-track">
@@ -261,8 +261,8 @@ function Marquee({ items }: { items: string[] }) {
 }
 
 function CrossMarquee({ topItems, bottomItems }: { topItems: string[]; bottomItems: string[] }) {
-  const topLine = topItems.join("   •   ") + "   •   ";
-  const bottomLine = bottomItems.join("   •   ") + "   •   ";
+  const topLine = Array(4).fill(topItems.join("   •   ") + "   •   ").join("");
+  const bottomLine = Array(4).fill(bottomItems.join("   •   ") + "   •   ").join("");
   return (
     <div className="relative overflow-hidden" style={{ height: 240, background: "var(--background)" }}>
       <div className="absolute left-1/2 top-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 -rotate-6">
@@ -782,45 +782,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Voice Tank */}
-        <section id="why" className="mx-auto max-w-6xl px-6 sm:px-10 pb-20 sm:pb-28">
-          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
-            Why us
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl mb-6" style={{ color: "var(--foreground)" }}>
-            Why Voice Tank
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div
-              className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
-            >
-              <IconMic2 className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
-                The pitch is the demo
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
-                An unaided 5-minute investor pitch, carried by Saarthi with no one at the mic,
-                is exactly the task it&apos;s built for — proving itself live, in front of the
-                people whose judgment matters most.
-              </p>
-            </div>
-            <div
-              className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
-            >
-              <IconCursorClick className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
-                Already in motion
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
-                Researched cold outreach is out right now to B2B SaaS companies. Voice Tank
-                isn&apos;t a first step for us — it&apos;s the accelerant that turns early
-                replies into paying pilots, fast.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="pt-16 pb-8" style={{ background: "var(--dark-panel)" }}>
