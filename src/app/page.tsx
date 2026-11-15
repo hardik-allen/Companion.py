@@ -79,6 +79,71 @@ function IconMic2({ className, style }: IconProps) {
   );
 }
 
+function IconEye({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <path className="icon-line" d="M2 12s3.8-7 10-7 10 7 10 7-3.8 7-10 7-10-7-10-7z" />
+      <circle className="icon-line" cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function IconResume({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <circle className="icon-line" cx="12" cy="12" r="9" />
+      <path className="icon-line" d="M10 8.5l6 3.5-6 3.5v-7z" />
+    </svg>
+  );
+}
+
+function IconSparkle({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <path className="icon-line" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
+    </svg>
+  );
+}
+
+function IconGrid({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <rect className="icon-line" x="3" y="3" width="8" height="8" rx="1.5" />
+      <rect className="icon-line" x="13" y="3" width="8" height="8" rx="1.5" />
+      <rect className="icon-line" x="3" y="13" width="8" height="8" rx="1.5" />
+      <rect className="icon-line" x="13" y="13" width="8" height="8" rx="1.5" />
+    </svg>
+  );
+}
+
+function IconArrowOpen({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <path className="icon-line" d="M4 12h15" />
+      <path className="icon-line" d="M13.5 6.5L19 12l-5.5 5.5" />
+    </svg>
+  );
+}
+
+function IconHelpCircle({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <circle className="icon-line" cx="12" cy="12" r="9" />
+      <path className="icon-line" d="M9.6 9.2a2.4 2.4 0 1 1 3.4 2.2c-.9.5-1.4 1-1.4 2" />
+      <circle cx="12" cy="16.6" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function IconShield({ className, style }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} style={style}>
+      <path className="icon-line" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+      <path className="icon-line" d="M9 12l2 2 4-4" />
+    </svg>
+  );
+}
+
 const PROBLEM_MOMENTS = [
   {
     icon: IconSearch,
@@ -112,6 +177,52 @@ const HOW_IT_WORKS = [
     icon: IconMic,
     title: "Voice, built in natively",
     body: "Built on Bolna's voice infrastructure from day one, not bolted onto a generic model after the fact.",
+  },
+];
+
+const FEATURES = [
+  {
+    icon: IconEye,
+    title: "Explains any screen",
+    body: "Ask “where do I see my FD maturity date?” — no menu-hunting required.",
+  },
+  {
+    icon: IconCursorClick,
+    title: "Clicks, scrolls, navigates",
+    body: "Taps, scrolls, opens the page directly on the user's own screen, in real time.",
+  },
+  {
+    icon: IconResume,
+    title: "Resumes mid-flow",
+    body: "Stuck halfway through a form? Saarthi picks up exactly where the user left off.",
+  },
+  {
+    icon: IconSparkle,
+    title: "Surfaces features you missed",
+    body: "Points out the product's own capabilities the user never knew to look for.",
+  },
+];
+
+const DEMO_STEPS = [
+  {
+    icon: IconGrid,
+    title: "Lands on a cluttered dashboard",
+    body: "A first-time user opens the app — four products, a dozen possible next steps.",
+  },
+  {
+    icon: IconMic2,
+    title: "Asks, out loud",
+    body: "Taps “Talk to Saarthi”: “How do I apply for a personal loan?”",
+  },
+  {
+    icon: IconArrowOpen,
+    title: "Opens it, doesn't just point",
+    body: "Saarthi knows the current screen and opens the loans page itself — the user doesn't tap anything.",
+  },
+  {
+    icon: IconHelpCircle,
+    title: "Helps mid-form, not just at the start",
+    body: "Stuck on an EMI field? Saarthi explains it in place — no restart, no drop-off.",
   },
 ];
 
@@ -201,6 +312,78 @@ export default function Home() {
                     {title}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#f8e9d8", opacity: 0.85 }}>
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="mx-auto max-w-5xl px-6 py-14">
+          <h2 className="text-2xl font-extrabold mb-2" style={{ color: "var(--maroon)" }}>
+            What Saarthi already does
+          </h2>
+          <p className="max-w-2xl mb-10" style={{ color: "var(--maroon)", opacity: 0.8 }}>
+            Proven on a live demo, not a slide — a fictional digital bank, built to show the
+            mechanism working end to end.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {FEATURES.map(({ icon: Icon, title, body }) => (
+              <div
+                key={title}
+                className="rounded-2xl p-6 border flex gap-4"
+                style={{ borderColor: "rgba(74,21,39,0.14)", background: "#fff" }}
+              >
+                <Icon className="w-7 h-7 shrink-0" style={{ color: "var(--gold-dark)" }} />
+                <div>
+                  <h3 className="font-bold mb-1" style={{ color: "var(--maroon)" }}>
+                    {title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--maroon)", opacity: 0.75 }}>
+                    {body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            className="mt-6 rounded-2xl p-5 flex items-start gap-3"
+            style={{ background: "rgba(234,179,8,0.1)" }}
+          >
+            <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold-dark)" }} />
+            <p className="text-sm leading-relaxed" style={{ color: "var(--maroon)", opacity: 0.85 }}>
+              Guardrailed by design: Saarthi can click, scroll and navigate for a user — but it
+              will never read or act on their balance, OTP, or account secrets.
+            </p>
+          </div>
+        </section>
+
+        {/* Demo */}
+        <section className="py-14" style={{ background: "#fff" }}>
+          <div className="mx-auto max-w-5xl px-6">
+            <h2 className="text-2xl font-extrabold mb-2" style={{ color: "var(--maroon)" }}>
+              The demo we built
+            </h2>
+            <p className="max-w-2xl mb-10" style={{ color: "var(--maroon)", opacity: 0.8 }}>
+              Demoed live on a fictional digital bank — the same mechanism drops into any
+              cluttered product.
+            </p>
+            <div className="grid sm:grid-cols-4 gap-5">
+              {DEMO_STEPS.map(({ icon: Icon, title, body }, i) => (
+                <div key={title} className="relative rounded-2xl p-5 border" style={{ borderColor: "rgba(74,21,39,0.14)" }}>
+                  <span
+                    className="absolute -top-3 -left-3 w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center"
+                    style={{ background: "var(--maroon)", color: "var(--gold-light)" }}
+                  >
+                    {i + 1}
+                  </span>
+                  <Icon className="w-6 h-6 mb-3" style={{ color: "var(--gold-dark)" }} />
+                  <h3 className="font-bold text-sm mb-1.5" style={{ color: "var(--maroon)" }}>
+                    {title}
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--maroon)", opacity: 0.75 }}>
                     {body}
                   </p>
                 </div>
