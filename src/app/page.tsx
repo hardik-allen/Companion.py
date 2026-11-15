@@ -325,6 +325,11 @@ const DEMO_STEPS = [
   },
 ];
 
+const FRAME_BG: CSSProperties = {
+  borderColor: "var(--border-gold)",
+  background: "linear-gradient(180deg, #170b12 0%, #0b060a 70%)",
+};
+
 const NAV_LINKS = [
   { href: "#problem", label: "Problem" },
   { href: "#features", label: "Features" },
@@ -340,10 +345,7 @@ export default function Home() {
         <section className="px-3 sm:px-6 pt-4 sm:pt-6">
           <div
             className="relative mx-auto max-w-6xl rounded-[28px] overflow-hidden border"
-            style={{
-              borderColor: "var(--border-gold)",
-              background: "linear-gradient(180deg, #170b12 0%, #0b060a 70%)",
-            }}
+            style={FRAME_BG}
           >
             <HeroArt />
 
@@ -408,37 +410,39 @@ export default function Home() {
         </section>
 
         {/* Problem */}
-        <section id="problem" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
-            The problem
-          </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
-            Every digital product — an internal dashboard or a public website — pays a hidden
-            tax on complexity. Chatbots and tooltips only describe where to go; the user still
-            has to find the control and operate it themselves. One cost, three moments:
-          </p>
-          <div className="grid sm:grid-cols-3 gap-5">
-            {PROBLEM_MOMENTS.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-2xl p-6 border"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-              >
-                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-                <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                  {body}
-                </p>
-              </div>
-            ))}
+        <section id="problem" className="px-3 sm:px-6 pt-6">
+          <div className="mx-auto max-w-6xl rounded-[28px] border px-6 sm:px-10 py-14 sm:py-16" style={FRAME_BG}>
+            <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
+              The problem
+            </h2>
+            <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
+              Every digital product — an internal dashboard or a public website — pays a hidden
+              tax on complexity. Chatbots and tooltips only describe where to go; the user still
+              has to find the control and operate it themselves. One cost, three moments:
+            </p>
+            <div className="grid sm:grid-cols-3 gap-5">
+              {PROBLEM_MOMENTS.map(({ icon: Icon, title, body }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl p-6 border"
+                  style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+                >
+                  <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
+                  <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+                    {title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* How it works */}
-        <section className="py-20" style={{ background: "var(--surface-2)" }}>
-          <div className="mx-auto max-w-5xl px-6">
+        <section className="px-3 sm:px-6 pt-6">
+          <div className="mx-auto max-w-6xl rounded-[28px] border px-6 sm:px-10 py-14 sm:py-16" style={FRAME_BG}>
             <h2 className="font-display text-3xl mb-10" style={{ color: "#fff" }}>
               How Saarthi is different
             </h2>
@@ -463,48 +467,50 @@ export default function Home() {
         </section>
 
         {/* Features */}
-        <section id="features" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
-            What Saarthi already does
-          </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
-            Proven on a live demo, not a slide — a fictional digital bank, built to show the
-            mechanism working end to end.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {FEATURES.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-2xl p-6 border flex gap-4"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-              >
-                <Icon className="w-7 h-7 shrink-0" style={{ color: "var(--gold)" }} />
-                <div>
-                  <h3 className="font-bold mb-1" style={{ color: "#fff" }}>
-                    {title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                    {body}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div
-            className="mt-6 rounded-2xl p-5 flex items-start gap-3 border"
-            style={{ background: "rgba(234,179,8,0.08)", borderColor: "var(--border-gold)" }}
-          >
-            <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold)" }} />
-            <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-              Guardrailed by design: Saarthi can click, scroll and navigate for a user — but it
-              will never read or act on their balance, OTP, or account secrets.
+        <section id="features" className="px-3 sm:px-6 pt-6">
+          <div className="mx-auto max-w-6xl rounded-[28px] border px-6 sm:px-10 py-14 sm:py-16" style={FRAME_BG}>
+            <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
+              What Saarthi already does
+            </h2>
+            <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
+              Proven on a live demo, not a slide — a fictional digital bank, built to show the
+              mechanism working end to end.
             </p>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {FEATURES.map(({ icon: Icon, title, body }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl p-6 border flex gap-4"
+                  style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+                >
+                  <Icon className="w-7 h-7 shrink-0" style={{ color: "var(--gold)" }} />
+                  <div>
+                    <h3 className="font-bold mb-1" style={{ color: "#fff" }}>
+                      {title}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                      {body}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div
+              className="mt-6 rounded-2xl p-5 flex items-start gap-3 border"
+              style={{ background: "rgba(234,179,8,0.08)", borderColor: "var(--border-gold)" }}
+            >
+              <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold)" }} />
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                Guardrailed by design: Saarthi can click, scroll and navigate for a user — but it
+                will never read or act on their balance, OTP, or account secrets.
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Demo */}
-        <section id="demo" className="py-20" style={{ background: "var(--surface-2)" }}>
-          <div className="mx-auto max-w-5xl px-6">
+        <section id="demo" className="px-3 sm:px-6 pt-6">
+          <div className="mx-auto max-w-6xl rounded-[28px] border px-6 sm:px-10 py-14 sm:py-16" style={FRAME_BG}>
             <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
               The demo we built
             </h2>
@@ -539,38 +545,40 @@ export default function Home() {
         </section>
 
         {/* Voice Tank */}
-        <section id="why" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-6" style={{ color: "#fff" }}>
-            Why Voice Tank
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div
-              className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-            >
-              <IconMic2 className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
-                The pitch is the demo
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                An unaided 5-minute investor pitch, carried by Saarthi with no one at the mic,
-                is exactly the task it&apos;s built for — proving itself live, in front of the
-                people whose judgment matters most.
-              </p>
-            </div>
-            <div
-              className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-            >
-              <IconCursorClick className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
-                Already in motion
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                Researched cold outreach is out right now to B2B SaaS companies. Voice Tank
-                isn&apos;t a first step for us — it&apos;s the accelerant that turns early
-                replies into paying pilots, fast.
-              </p>
+        <section id="why" className="px-3 sm:px-6 py-6">
+          <div className="mx-auto max-w-6xl rounded-[28px] border px-6 sm:px-10 py-14 sm:py-16" style={FRAME_BG}>
+            <h2 className="font-display text-3xl mb-6" style={{ color: "#fff" }}>
+              Why Voice Tank
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div
+                className="rounded-2xl p-6 border"
+                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+              >
+                <IconMic2 className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
+                <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+                  The pitch is the demo
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                  An unaided 5-minute investor pitch, carried by Saarthi with no one at the mic,
+                  is exactly the task it&apos;s built for — proving itself live, in front of the
+                  people whose judgment matters most.
+                </p>
+              </div>
+              <div
+                className="rounded-2xl p-6 border"
+                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+              >
+                <IconCursorClick className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
+                <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+                  Already in motion
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                  Researched cold outreach is out right now to B2B SaaS companies. Voice Tank
+                  isn&apos;t a first step for us — it&apos;s the accelerant that turns early
+                  replies into paying pilots, fast.
+                </p>
+              </div>
             </div>
           </div>
         </section>
