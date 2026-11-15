@@ -665,6 +665,16 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <a
+              href="https://bharat-bank.onrender.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-8 text-sm font-semibold px-6 py-3 rounded-full"
+              style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
+            >
+              Try the live demo
+              <IconArrowOpen className="w-4 h-4" />
+            </a>
           </div>
         </section>
 
