@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b060a;
-  --foreground: #f7eee9;
+  --background: #f6f1e4;
+  --foreground: #2a0e18;
   --maroon: #4a1527;
   --maroon-dark: #2a0e18;
   --gold: #eab308;
   --gold-dark: #a16207;
   --gold-light: #fbbf24;
-  --surface: #160c12;
-  --border-soft: rgba(247, 238, 233, 0.1);
-  --border-gold: rgba(234, 179, 8, 0.25);
+  --cream-card: #fffdf7;
+  --dark-panel: #140a10;
+  --border-ink: rgba(42, 14, 24, 0.14);
+  --border-gold: rgba(234, 179, 8, 0.35);
+  --ink-muted: rgba(42, 14, 24, 0.68);
   --text-muted: rgba(247, 238, 233, 0.68);
 }
 
@@ -22,8 +24,7 @@
 }
 
 body {
-  background: radial-gradient(ellipse 1400px 900px at 50% 0%, #3a1220 0%, #170b12 35%, #0b060a 70%)
-    fixed;
+  background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,4 +39,44 @@ body {
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.marquee-viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+details.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+}
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+details.faq-item .faq-icon {
+  transition: transform 0.2s ease;
+}
+details.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
 }

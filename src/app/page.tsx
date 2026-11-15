@@ -197,7 +197,6 @@ function HeroArt() {
         />
       ))}
 
-      {/* floor */}
       <g stroke="#eab308" strokeOpacity="0.14">
         {[520, 545, 572, 600].map((y) => (
           <line key={y} x1={0} y1={y} x2={1200} y2={y} />
@@ -226,7 +225,6 @@ function HeroArt() {
         <circle key={i} cx={d.cx} cy={d.cy} r={d.r} fill="#fbbf24" fillOpacity="0.5" />
       ))}
 
-      {/* thematic glyphs: mic, screen, cursor */}
       <g transform="translate(150 150)" stroke="#fbbf24" strokeOpacity="0.5" strokeWidth="1.6" fill="none">
         <rect x="0" y="0" width="16" height="28" rx="8" />
         <path d="M-8 20a16 16 0 0 0 32 0" />
@@ -240,6 +238,72 @@ function HeroArt() {
         <path d="M0 0l22 15-9 3-4 11z" />
       </g>
     </svg>
+  );
+}
+
+function Marquee({ items }: { items: string[] }) {
+  const line = items.join("   ·   ") + "   ·   ";
+  return (
+    <div className="marquee-viewport py-4" style={{ background: "var(--dark-panel)" }}>
+      <div className="marquee-track">
+        {[0, 1].map((rep) => (
+          <span
+            key={rep}
+            className="text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap px-4"
+            style={{ color: "var(--gold)" }}
+          >
+            {line}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CrossMarquee({ topItems, bottomItems }: { topItems: string[]; bottomItems: string[] }) {
+  const topLine = topItems.join("   •   ") + "   •   ";
+  const bottomLine = bottomItems.join("   •   ") + "   •   ";
+  return (
+    <div className="relative overflow-hidden" style={{ height: 240, background: "var(--background)" }}>
+      <div className="absolute left-1/2 top-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 -rotate-6">
+        <div className="marquee-viewport py-3 shadow-lg" style={{ background: "var(--dark-panel)" }}>
+          <div className="marquee-track">
+            {[0, 1].map((rep) => (
+              <span
+                key={rep}
+                className="text-sm font-bold uppercase tracking-widest whitespace-nowrap px-4"
+                style={{ color: "var(--gold)" }}
+              >
+                {topLine}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-1/2 top-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 rotate-6">
+        <div className="marquee-viewport py-3 shadow-lg" style={{ background: "var(--gold-light)" }}>
+          <div className="marquee-track" style={{ animationDirection: "reverse" }}>
+            {[0, 1].map((rep) => (
+              <span
+                key={rep}
+                className="text-sm font-bold uppercase tracking-widest whitespace-nowrap px-4"
+                style={{ color: "var(--maroon-dark)" }}
+              >
+                {bottomLine}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
+        <div
+          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full flex items-center justify-center border-4 shadow-xl"
+          style={{ background: "var(--cream-card)", borderColor: "var(--gold)" }}
+        >
+          <IconMic2 className="w-10 h-10" style={{ color: "var(--maroon-dark)" }} />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -279,49 +343,84 @@ const HOW_IT_WORKS = [
   },
 ];
 
-const FEATURES = [
+const TRACKS = [
   {
     icon: IconEye,
     title: "Explains any screen",
-    body: "Ask “where do I see my FD maturity date?” — no menu-hunting required.",
+    example: "“Where do I see my FD maturity date?”",
+    unlocks: "No menu-hunting, ever",
   },
   {
     icon: IconCursorClick,
     title: "Clicks, scrolls, navigates",
-    body: "Taps, scrolls, opens the page directly on the user's own screen, in real time.",
+    example: "Opens the loans page itself, mid-conversation",
+    unlocks: "Zero drop-off mid-task",
   },
   {
     icon: IconResume,
     title: "Resumes mid-flow",
-    body: "Stuck halfway through a form? Saarthi picks up exactly where the user left off.",
+    example: "Picks up a half-filled EMI form",
+    unlocks: "No restarts, no frustration",
   },
   {
     icon: IconSparkle,
     title: "Surfaces features you missed",
-    body: "Points out the product's own capabilities the user never knew to look for.",
+    example: "Points out a tool you never knew existed",
+    unlocks: "Discoverability, by default",
   },
 ];
 
 const DEMO_STEPS = [
   {
     icon: IconGrid,
+    tag: "SCREEN",
     title: "Lands on a cluttered dashboard",
     body: "A first-time user opens the app — four products, a dozen possible next steps.",
   },
   {
     icon: IconMic2,
+    tag: "VOICE",
     title: "Asks, out loud",
     body: "Taps “Talk to Saarthi”: “How do I apply for a personal loan?”",
   },
   {
     icon: IconArrowOpen,
+    tag: "ACTION",
     title: "Opens it, doesn't just point",
     body: "Saarthi knows the current screen and opens the loans page itself — the user doesn't tap anything.",
   },
   {
     icon: IconHelpCircle,
+    tag: "HELP",
     title: "Helps mid-form, not just at the start",
     body: "Stuck on an EMI field? Saarthi explains it in place — no restart, no drop-off.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "What is Saarthi?",
+    a: "A voice agent that reads a business's own screens and controls, then acts on them directly — built natively on Bolna's voice infrastructure.",
+  },
+  {
+    q: "Does it take screenshots?",
+    a: "No. It reads a structured map of the screen's controls, not pixels — that's what makes it faster and cheaper by architecture, not just by claim.",
+  },
+  {
+    q: "What can it actually do today?",
+    a: "Navigate, click, scroll, explain any screen, and resume a flow mid-way — proven on a live demo built on a fictional digital bank.",
+  },
+  {
+    q: "Will it ever touch my balance or OTP?",
+    a: "Never. Guardrailed by design — balance, OTP, PAN and account secrets are off-limits, no matter how far execution grows.",
+  },
+  {
+    q: "How is this different from a chatbot?",
+    a: "A chatbot answers where to go. Saarthi goes there itself — it taps, scrolls and opens the right screen on the user's behalf.",
+  },
+  {
+    q: "Is this live anywhere yet?",
+    a: "It's proven on a live demo, and we're in early conversations with B2B SaaS companies about running real pilots.",
   },
 ];
 
@@ -329,7 +428,7 @@ const NAV_LINKS = [
   { href: "#problem", label: "Problem" },
   { href: "#features", label: "Features" },
   { href: "#demo", label: "Demo" },
-  { href: "#why", label: "Why Us" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export default function Home() {
@@ -337,7 +436,7 @@ export default function Home() {
     <div className="flex flex-col min-h-full">
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-hidden" style={{ background: "var(--dark-panel)" }}>
           <HeroArt />
 
           <nav className="relative z-10 mx-auto max-w-6xl flex items-center justify-between px-6 sm:px-10 py-6">
@@ -358,7 +457,7 @@ export default function Home() {
               ))}
             </div>
             <a
-              href="#why"
+              href="#pilot"
               className="text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full border"
               style={{ borderColor: "rgba(255,255,255,0.25)", color: "#fff" }}
             >
@@ -373,10 +472,7 @@ export default function Home() {
             >
               Perplexity Desktop, for business — with voice
             </p>
-            <h1
-              className="font-display text-4xl sm:text-6xl leading-[1.08] mb-6"
-              style={{ color: "#fff" }}
-            >
+            <h1 className="font-display text-4xl sm:text-6xl leading-[1.08] mb-6" style={{ color: "#fff" }}>
               Acts Inside Your Product,
               <br className="hidden sm:block" /> Not Just Around It
             </h1>
@@ -399,12 +495,24 @@ export default function Home() {
           </div>
         </section>
 
+        <Marquee
+          items={[
+            "SAARTHI — VOICE-NATIVE NAVIGATION",
+            "NO SCREENSHOTS, EVER",
+            "BUILT NATIVELY ON BOLNA",
+            "ACTS, DOESN'T JUST POINT",
+          ]}
+        />
+
         {/* Problem */}
-        <section id="problem" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
+        <section id="problem" className="mx-auto max-w-6xl px-6 sm:px-10 py-20 sm:py-28">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+            Problem
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl mb-3" style={{ color: "var(--foreground)" }}>
             The problem
           </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
+          <p className="max-w-2xl mb-10" style={{ color: "var(--ink-muted)" }}>
             Every digital product — an internal dashboard or a public website — pays a hidden
             tax on complexity. Chatbots and tooltips only describe where to go; the user still
             has to find the control and operate it themselves. One cost, three moments:
@@ -414,13 +522,13 @@ export default function Home() {
               <div
                 key={title}
                 className="rounded-2xl p-6 border"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+                style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
               >
-                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-                <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
+                <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
                   {title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
                   {body}
                 </p>
               </div>
@@ -429,118 +537,231 @@ export default function Home() {
         </section>
 
         {/* How it works */}
-        <section className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-10" style={{ color: "#fff" }}>
-            How Saarthi is different
-          </h2>
-          <div className="grid sm:grid-cols-3 gap-5">
-            {HOW_IT_WORKS.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-2xl p-6 border"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-              >
-                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-                <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                  {body}
-                </p>
-              </div>
-            ))}
+        <section className="w-full" style={{ background: "rgba(234,179,8,0.06)" }}>
+          <div className="mx-auto max-w-6xl px-6 sm:px-10 py-20 sm:py-28">
+            <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+              Approach
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl mb-10" style={{ color: "var(--foreground)" }}>
+              How Saarthi is different
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-5">
+              {HOW_IT_WORKS.map(({ icon: Icon, title, body }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl p-6 border"
+                  style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
+                >
+                  <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
+                  <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
+                    {title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Features */}
-        <section id="features" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
+        {/* Features as numbered tracks */}
+        <section id="features" className="mx-auto max-w-6xl px-6 sm:px-10 py-20 sm:py-28">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+            Features
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl mb-3" style={{ color: "var(--foreground)" }}>
             What Saarthi already does
           </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
+          <p className="max-w-2xl mb-10" style={{ color: "var(--ink-muted)" }}>
             Proven on a live demo, not a slide — a fictional digital bank, built to show the
             mechanism working end to end.
           </p>
           <div className="grid sm:grid-cols-2 gap-5">
-            {FEATURES.map(({ icon: Icon, title, body }) => (
+            {TRACKS.map(({ icon: Icon, title, example, unlocks }, i) => (
               <div
                 key={title}
-                className="rounded-2xl p-6 border flex gap-4"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+                className="rounded-2xl p-6 border relative overflow-hidden"
+                style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
               >
-                <Icon className="w-7 h-7 shrink-0" style={{ color: "var(--gold)" }} />
-                <div>
-                  <h3 className="font-bold mb-1" style={{ color: "#fff" }}>
-                    {title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                    {body}
-                  </p>
-                </div>
+                <span
+                  className="font-display absolute -top-3 right-4 text-6xl select-none"
+                  style={{ color: "transparent", WebkitTextStroke: "1.5px var(--border-ink)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
+                <h3 className="font-bold mb-1" style={{ color: "var(--foreground)" }}>
+                  {title}
+                </h3>
+                <p className="text-sm italic mb-3" style={{ color: "var(--ink-muted)" }}>
+                  e.g. {example}
+                </p>
+                <p
+                  className="text-xs font-bold uppercase tracking-widest mb-1"
+                  style={{ color: "var(--gold-dark)" }}
+                >
+                  Unlocks
+                </p>
+                <p className="text-sm" style={{ color: "var(--foreground)" }}>
+                  {unlocks}
+                </p>
               </div>
             ))}
           </div>
           <div
             className="mt-6 rounded-2xl p-5 flex items-start gap-3 border"
-            style={{ background: "rgba(234,179,8,0.08)", borderColor: "var(--border-gold)" }}
+            style={{ background: "rgba(234,179,8,0.1)", borderColor: "var(--border-gold)" }}
           >
-            <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold)" }} />
-            <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+            <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold-dark)" }} />
+            <p className="text-sm leading-relaxed" style={{ color: "var(--foreground)" }}>
               Guardrailed by design: Saarthi can click, scroll and navigate for a user — but it
               will never read or act on their balance, OTP, or account secrets.
             </p>
           </div>
         </section>
 
-        {/* Demo */}
-        <section id="demo" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-3" style={{ color: "#fff" }}>
-            The demo we built
-          </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--text-muted)" }}>
-            Demoed live on a fictional digital bank — the same mechanism drops into any
-            cluttered product.
-          </p>
-          <div className="grid sm:grid-cols-4 gap-5">
-            {DEMO_STEPS.map(({ icon: Icon, title, body }, i) => (
-              <div
-                key={title}
-                className="relative rounded-2xl p-5 border"
-                style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
-              >
-                <span
-                  className="absolute -top-3 -left-3 w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center"
-                  style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
+        {/* Demo as rounds */}
+        <section id="demo" className="w-full" style={{ background: "rgba(74,21,39,0.05)" }}>
+          <div className="mx-auto max-w-6xl px-6 sm:px-10 py-20 sm:py-28">
+            <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+              Demo
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl mb-3" style={{ color: "var(--foreground)" }}>
+              The demo we built
+            </h2>
+            <p className="max-w-2xl mb-10" style={{ color: "var(--ink-muted)" }}>
+              Demoed live on a fictional digital bank — the same mechanism drops into any
+              cluttered product.
+            </p>
+            <div className="grid sm:grid-cols-4 gap-5">
+              {DEMO_STEPS.map(({ icon: Icon, tag, title, body }, i) => (
+                <div
+                  key={title}
+                  className="relative rounded-2xl p-5"
+                  style={{ background: "var(--dark-panel)" }}
                 >
-                  {i + 1}
-                </span>
-                <Icon className="w-6 h-6 mb-3" style={{ color: "var(--gold)" }} />
-                <h3 className="font-bold text-sm mb-1.5" style={{ color: "#fff" }}>
-                  {title}
-                </h3>
-                <p className="text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                  {body}
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className="w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center"
+                      style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-widest"
+                      style={{ color: "rgba(255,255,255,0.45)" }}
+                    >
+                      {tag}
+                    </span>
+                  </div>
+                  <Icon className="w-6 h-6 mb-3" style={{ color: "var(--gold)" }} />
+                  <h3 className="font-bold text-sm mb-1.5" style={{ color: "#fff" }}>
+                    {title}
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <CrossMarquee
+          topItems={["VOICE-NATIVE NAVIGATION", "ZERO SCREENSHOTS", "BUILT ON BOLNA"]}
+          bottomItems={["ACTS, DOESN'T JUST POINT", "BUILD FOR A BILLION SCREENS", "NO MENU-HUNTING"]}
+        />
+
+        {/* FAQ */}
+        <section id="faq" className="mx-auto max-w-4xl px-6 sm:px-10 py-20 sm:py-28">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+            FAQ
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl mb-10" style={{ color: "var(--foreground)" }}>
+            A few answers, before you ask.
+          </h2>
+          <div className="flex flex-col">
+            {FAQS.map(({ q, a }) => (
+              <details key={q} className="faq-item border-b py-5" style={{ borderColor: "var(--border-ink)" }}>
+                <summary className="flex items-center justify-between gap-4 font-bold" style={{ color: "var(--foreground)" }}>
+                  {q}
+                  <span className="faq-icon shrink-0 text-xl leading-none" style={{ color: "var(--gold-dark)" }}>
+                    +
+                  </span>
+                </summary>
+                <p className="text-sm leading-relaxed mt-3" style={{ color: "var(--ink-muted)" }}>
+                  {a}
                 </p>
-              </div>
+              </details>
             ))}
           </div>
         </section>
 
+        {/* Pilot pass CTA */}
+        <section id="pilot" className="px-3 sm:px-6 pb-16">
+          <div
+            className="mx-auto max-w-6xl rounded-[28px] p-8 sm:p-14 grid sm:grid-cols-[1fr_auto] gap-8 items-center"
+            style={{ background: "var(--dark-panel)" }}
+          >
+            <div>
+              <p
+                className="text-xs font-bold uppercase tracking-widest mb-3"
+                style={{ color: "var(--gold)" }}
+              >
+                Saarthi × companion.py
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl mb-4" style={{ color: "#fff" }}>
+                Bring Saarthi to your product.
+              </h2>
+              <p className="text-sm sm:text-base mb-6 max-w-md" style={{ color: "rgba(255,255,255,0.68)" }}>
+                Hand us a map of your screens — we&apos;ll show you a voice agent that acts on
+                them, not just talks about them.
+              </p>
+              <a
+                href="mailto:hello@companion.py?subject=Saarthi%20pilot"
+                className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full"
+                style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
+              >
+                Request a pilot
+                <IconArrowOpen className="w-4 h-4" />
+              </a>
+            </div>
+            <div
+              className="rounded-2xl px-7 py-6 text-center border-2 border-dashed"
+              style={{ borderColor: "rgba(234,179,8,0.4)" }}
+            >
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Pilot pass
+              </p>
+              <p className="font-display text-2xl mb-1" style={{ color: "#fff" }}>
+                Early Access
+              </p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "var(--gold)" }}>
+                Status: Open
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Voice Tank */}
-        <section id="why" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="font-display text-3xl mb-6" style={{ color: "#fff" }}>
+        <section id="why" className="mx-auto max-w-6xl px-6 sm:px-10 pb-20 sm:pb-28">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "var(--gold-dark)" }}>
+            Why us
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl mb-6" style={{ color: "var(--foreground)" }}>
             Why Voice Tank
           </h2>
           <div className="grid sm:grid-cols-2 gap-6">
             <div
               className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+              style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
             >
-              <IconMic2 className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+              <IconMic2 className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
+              <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
                 The pitch is the demo
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
                 An unaided 5-minute investor pitch, carried by Saarthi with no one at the mic,
                 is exactly the task it&apos;s built for — proving itself live, in front of the
                 people whose judgment matters most.
@@ -548,13 +769,13 @@ export default function Home() {
             </div>
             <div
               className="rounded-2xl p-6 border"
-              style={{ borderColor: "var(--border-soft)", background: "var(--surface)" }}
+              style={{ borderColor: "var(--border-ink)", background: "var(--cream-card)" }}
             >
-              <IconCursorClick className="w-7 h-7 mb-4" style={{ color: "var(--gold)" }} />
-              <h3 className="font-bold mb-1.5" style={{ color: "#fff" }}>
+              <IconCursorClick className="w-7 h-7 mb-4" style={{ color: "var(--gold-dark)" }} />
+              <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
                 Already in motion
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--ink-muted)" }}>
                 Researched cold outreach is out right now to B2B SaaS companies. Voice Tank
                 isn&apos;t a first step for us — it&apos;s the accelerant that turns early
                 replies into paying pilots, fast.
@@ -564,14 +785,19 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t py-8" style={{ borderColor: "var(--border-soft)" }}>
-        <div className="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-sm font-bold" style={{ color: "#fff" }}>
-            companion.py
-          </span>
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Saarthi — built natively on Bolna voice infrastructure
-          </span>
+      <footer className="py-10" style={{ background: "var(--dark-panel)" }}>
+        <div className="mx-auto max-w-5xl px-6">
+          <p className="font-display italic text-xl mb-6" style={{ color: "var(--gold)" }}>
+            Built for Bharat&apos;s next billion screens.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+            <span className="text-sm font-bold" style={{ color: "#fff" }}>
+              companion.py
+            </span>
+            <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Saarthi — built natively on Bolna voice infrastructure
+            </span>
+          </div>
         </div>
       </footer>
     </div>
