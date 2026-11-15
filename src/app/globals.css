@@ -22,7 +22,8 @@
 }
 
 body {
-  background: var(--background);
+  background: radial-gradient(ellipse 1400px 900px at 50% 0%, #3a1220 0%, #170b12 35%, #0b060a 70%)
+    fixed;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
