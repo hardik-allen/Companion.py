@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fa;
-  --foreground: #4a1527;
+  --background: #0b060a;
+  --foreground: #f7eee9;
   --maroon: #4a1527;
   --maroon-dark: #2a0e18;
   --gold: #eab308;
   --gold-dark: #a16207;
   --gold-light: #fbbf24;
+  --surface: #160c12;
+  --surface-2: #1f0f17;
+  --border-soft: rgba(247, 238, 233, 0.1);
+  --border-gold: rgba(234, 179, 8, 0.25);
+  --text-muted: rgba(247, 238, 233, 0.68);
 }
 
 @theme inline {
@@ -21,6 +26,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-fraunces);
 }
 
 .icon-line {
