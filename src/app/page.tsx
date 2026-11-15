@@ -266,7 +266,7 @@ function CrossMarquee({ topItems, bottomItems }: { topItems: string[]; bottomIte
   return (
     <div className="relative overflow-hidden" style={{ height: 240, background: "var(--background)" }}>
       <div className="absolute left-1/2 top-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 -rotate-6">
-        <div className="marquee-viewport py-3 shadow-lg" style={{ background: "var(--dark-panel)" }}>
+        <div className="marquee-viewport py-3" style={{ background: "var(--dark-panel)" }}>
           <div className="marquee-track">
             {[0, 1].map((rep) => (
               <span
@@ -281,7 +281,7 @@ function CrossMarquee({ topItems, bottomItems }: { topItems: string[]; bottomIte
         </div>
       </div>
       <div className="absolute left-1/2 top-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 rotate-6">
-        <div className="marquee-viewport py-3 shadow-lg" style={{ background: "var(--gold-light)" }}>
+        <div className="marquee-viewport py-3" style={{ background: "var(--gold-light)" }}>
           <div className="marquee-track" style={{ animationDirection: "reverse" }}>
             {[0, 1].map((rep) => (
               <span
@@ -304,6 +304,16 @@ function CrossMarquee({ topItems, bottomItems }: { topItems: string[]; bottomIte
         </div>
       </div>
     </div>
+  );
+}
+
+function EqualizerBars({ className }: { className?: string }) {
+  return (
+    <span className={`eq-bars${className ? ` ${className}` : ""}`} aria-hidden>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <span key={i} />
+      ))}
+    </span>
   );
 }
 
@@ -484,6 +494,18 @@ export default function Home() {
               operates them directly — no screenshots, no visual guessing — with a voice layer
               built in from the start.
             </p>
+            <div className="flex justify-center mb-9">
+              <div
+                className="inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-left"
+                style={{ borderColor: "rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.05)" }}
+              >
+                <EqualizerBars />
+                <p className="text-xs sm:text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
+                  &ldquo;How do I apply for a personal loan?&rdquo;{" "}
+                  <span style={{ color: "var(--gold)" }}>→ opening Loans…</span>
+                </p>
+              </div>
+            </div>
             <a
               href="#demo"
               className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full border"
@@ -655,7 +677,13 @@ export default function Home() {
                       {tag}
                     </span>
                   </div>
-                  <Icon className="w-6 h-6 mb-3" style={{ color: "var(--gold)" }} />
+                  {tag === "VOICE" ? (
+                    <div className="h-6 mb-3 flex items-end">
+                      <EqualizerBars />
+                    </div>
+                  ) : (
+                    <Icon className="w-6 h-6 mb-3" style={{ color: "var(--gold)" }} />
+                  )}
                   <h3 className="font-bold text-sm mb-1.5" style={{ color: "#fff" }}>
                     {title}
                   </h3>
