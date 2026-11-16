@@ -1,19 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f1e4;
-  --foreground: #2a0e18;
+  --background: #ffffff;
+  --foreground: #16090f;
   --maroon: #4a1527;
   --maroon-dark: #2a0e18;
   --gold: #eab308;
   --gold-dark: #a16207;
   --gold-light: #fbbf24;
-  --cream-card: #fffdf7;
+  --surface: #f7f4ef;
   --dark-panel: #140a10;
-  --border-ink: rgba(42, 14, 24, 0.14);
-  --border-gold: rgba(234, 179, 8, 0.35);
-  --ink-muted: rgba(42, 14, 24, 0.68);
-  --text-muted: rgba(247, 238, 233, 0.68);
+  --border: rgba(22, 9, 15, 0.1);
+  --muted: #5b5660;
 }
 
 @theme inline {
@@ -29,45 +27,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.font-display {
-  font-family: var(--font-fraunces);
-}
-
 .icon-line {
   stroke: currentColor;
   fill: none;
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.marquee-viewport {
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  transform: translateZ(0);
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 18s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
 }
 
 .eq-bars {
@@ -79,7 +44,7 @@ body {
 .eq-bars span {
   width: 3px;
   border-radius: 2px;
-  background: var(--gold);
+  background: currentColor;
   animation: eqBounce 1s ease-in-out infinite;
 }
 .eq-bars span:nth-child(1) {
@@ -129,4 +94,29 @@ details.faq-item .faq-icon {
 }
 details.faq-item[open] .faq-icon {
   transform: rotate(45deg);
+}
+
+.phone-frame {
+  border: 10px solid #111;
+  border-radius: 2.25rem;
+  overflow: hidden;
+  background: #111;
+  box-shadow:
+    0 30px 60px -15px rgba(22, 9, 15, 0.35),
+    0 0 0 1px rgba(22, 9, 15, 0.05);
+}
+
+.play-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease;
+}
+.play-button:hover {
+  transform: scale(1.06);
 }
