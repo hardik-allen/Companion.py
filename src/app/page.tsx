@@ -1,607 +1,343 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
+import {
+  Compass,
+  Eye,
+  Lightning,
+  MagnifyingGlass,
+  MapTrifold,
+  Microphone,
+  ShieldCheck,
+  SignOut,
+} from "@phosphor-icons/react/ssr";
 import DemoVideo from "./components/DemoVideo";
+import Reveal from "./components/Reveal";
+import { DemoLink, Footer, Header } from "./components/SiteChrome";
+import Tagline from "./components/Tagline";
 
-type IconProps = { className?: string; style?: CSSProperties };
+const DEMO = "https://bharat-bank.onrender.com";
 
-function IconSearch({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <circle className="icon-line" cx="10.5" cy="10.5" r="6.5" />
-      <path className="icon-line" d="M20 20l-4.8-4.8" />
-    </svg>
-  );
-}
-
-function IconCompass({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <circle className="icon-line" cx="12" cy="12" r="9" />
-      <path className="icon-line" d="M15.5 8.5l-2.2 5.3-5.3 2.2 2.2-5.3 5.3-2.2z" />
-    </svg>
-  );
-}
-
-function IconDoorExit({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M9 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3" />
-      <path className="icon-line" d="M13 12H21" />
-      <path className="icon-line" d="M17.5 8.5L21 12l-3.5 3.5" />
-      <path className="icon-line" d="M9 4h8a1 1 0 0 1 1 1v3" />
-      <path className="icon-line" d="M18 16v3a1 1 0 0 1-1 1H9" />
-    </svg>
-  );
-}
-
-function IconMap({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M9 4l-5 2v14l5-2 6 2 5-2V4l-5 2-6-2z" />
-      <path className="icon-line" d="M9 4v14" />
-      <path className="icon-line" d="M15 6v14" />
-    </svg>
-  );
-}
-
-function IconBolt({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M13 3L6 14h5l-1 7 7-11h-5l1-7z" />
-    </svg>
-  );
-}
-
-function IconMic({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <rect className="icon-line" x="9" y="3" width="6" height="11" rx="3" />
-      <path className="icon-line" d="M5 11a7 7 0 0 0 14 0" />
-      <path className="icon-line" d="M12 18v3" />
-      <path className="icon-line" d="M9 21h6" />
-    </svg>
-  );
-}
-
-function IconEye({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M2 12s3.8-7 10-7 10 7 10 7-3.8 7-10 7-10-7-10-7z" />
-      <circle className="icon-line" cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function IconArrowOpen({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M4 12h15" />
-      <path className="icon-line" d="M13.5 6.5L19 12l-5.5 5.5" />
-    </svg>
-  );
-}
-
-function IconResume({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <circle className="icon-line" cx="12" cy="12" r="9" />
-      <path className="icon-line" d="M10 8.5l6 3.5-6 3.5v-7z" />
-    </svg>
-  );
-}
-
-function IconMic2({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M4 14c3 3 13 3 16 0" />
-      <path className="icon-line" d="M12 3v15" />
-      <circle className="icon-line" cx="12" cy="3" r="2" />
-    </svg>
-  );
-}
-
-function IconShield({ className, style }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} style={style}>
-      <path className="icon-line" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
-      <path className="icon-line" d="M9 12l2 2 4-4" />
-    </svg>
-  );
-}
-
-function EqualizerBars({ className }: { className?: string }) {
-  return (
-    <span className={`eq-bars${className ? ` ${className}` : ""}`} aria-hidden>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <span key={i} />
-      ))}
-    </span>
-  );
-}
-
-const NAV_LINKS = [
-  { href: "#problem", label: "Problem" },
-  { href: "#demo", label: "See it in action" },
-  { href: "#faq", label: "FAQ" },
-];
-
-const PROBLEM_MOMENTS = [
+const PROBLEMS = [
   {
-    icon: IconSearch,
-    title: "Discoverability",
-    body: "Before someone even starts, they can't find what they need.",
+    icon: MagnifyingGlass,
+    title: "They cannot find it",
+    body: "Before the task starts, the control is buried and they never reach it.",
   },
   {
-    icon: IconCompass,
-    title: "Navigation",
-    body: "Mid-task, they get lost in a complex product and give up.",
+    icon: Compass,
+    title: "They get lost",
+    body: "Halfway through, the product is deep and they stop looking.",
   },
   {
-    icon: IconDoorExit,
-    title: "Drop-off",
-    body: "Right at the moment they'd convert or complete, they bail.",
+    icon: SignOut,
+    title: "They leave",
+    body: "At the last step, the flow is still unfinished and they go.",
   },
 ];
 
-const HOW_IT_WORKS = [
+const BENEFITS = [
   {
-    icon: IconMap,
-    title: "A structured map, not a screenshot",
-    body: "A business hands Saarthi a map of its own screens and controls up front. No pixel-guessing, no visual-parsing round trips.",
+    title: "The right screen opens",
+    body: "They ask, and Saarthi opens it. They do not search the menu.",
   },
   {
-    icon: IconBolt,
-    title: "Reads and acts directly",
-    body: "The agent reads the map and acts on real controls — faster and cheaper by architecture, not just by claim.",
+    title: "A stalled task continues",
+    body: "It fills the biller, the consumer number, and the amount where they stopped.",
   },
   {
-    icon: IconMic,
-    title: "Voice, built in natively",
-    body: "Built on Bolna's voice infrastructure from day one, not bolted onto a generic model after the fact.",
+    title: "No pixel guessing",
+    body: "It reads a map of controls, so it does not decide from a screenshot.",
+  },
+  {
+    title: "Secrets stay with the person",
+    body: "Balance, OTP, PAN, and account secrets are refused.",
   },
 ];
 
-const SHOWCASE = [
+const STEPS = [
   {
-    icon: IconEye,
+    icon: MapTrifold,
+    title: "Map the product",
+    body: "You give Saarthi the screens and the controls on them.",
+  },
+  {
+    icon: Lightning,
+    title: "It acts on those controls",
+    body: "Navigate, fill, and press happen on the real page.",
+  },
+  {
+    icon: Microphone,
+    title: "They confirm the last step",
+    body: "Voice runs on Bolna. Money movement and secrets stay with them.",
+  },
+];
+
+const PROOF = [
+  {
+    icon: Eye,
     tag: "Home",
-    title: "Explains any screen",
-    body: "Ask “where do I see my account balance?” and Saarthi answers in place, on the screen the user is already looking at — no menu-hunting required.",
+    title: "Explains the screen they are on",
+    body: "Ask where the account balance is. Saarthi answers on that screen.",
     shot: "/screenshots/bharatbank-dashboard.jpg",
+    alt: "BharatBank home screen with the account balance",
   },
   {
-    icon: IconArrowOpen,
+    icon: Compass,
     tag: "Loans",
-    title: "Opens it, doesn't just point",
-    body: "Ask how to apply for a personal loan, and Saarthi opens the Loans page itself — the user doesn't tap anything.",
+    title: "Opens the page itself",
+    body: "Ask how to apply for a personal loan. Saarthi opens the loans page.",
     shot: "/screenshots/bharatbank-loans.jpg",
+    alt: "BharatBank loans screen",
   },
   {
-    icon: IconResume,
-    title: "Resumes mid-flow",
+    icon: Lightning,
     tag: "Bill pay",
-    body: "Stuck halfway through a bill payment? Saarthi fills the biller, the consumer number and the amount in place — no restart, no drop-off.",
+    title: "Continues a payment in place",
+    body: "Halfway through a bill, it fills the biller, the consumer number, and the amount.",
     shot: "/screenshots/bharatbank-bills.jpg",
+    alt: "BharatBank bill payment screen",
   },
   {
-    icon: IconMic2,
+    icon: Microphone,
     tag: "UPI",
-    title: "Pays and transfers by voice",
-    body: "The same mechanism drives UPI and scan-and-pay — Saarthi fills the form and hands control back for the final confirmation.",
+    title: "Fills the transfer",
+    body: "The same path runs UPI and scan and pay. Saarthi fills the form and hands back the last confirmation.",
     shot: "/screenshots/bharatbank-upi.jpg",
+    alt: "BharatBank UPI payment screen",
   },
 ];
 
 const FAQS = [
   {
     q: "What is Saarthi?",
-    a: "Saarthi is companion.py's voice agent — it reads a business's own screens and controls, then acts on them directly, built natively on Bolna's voice infrastructure.",
+    a: "Saarthi is a voice agent from companion.py. It reads a map of a product's screens and controls, then acts on them. Voice runs on Bolna.",
   },
   {
     q: "Does it take screenshots?",
-    a: "No. It reads a structured map of the screen's controls, not pixels — that's what makes it faster and cheaper by architecture, not just by claim.",
+    a: "No. It reads a structured map of controls, not pixels.",
   },
   {
-    q: "What can it actually do today?",
-    a: "Navigate, click, scroll, explain any screen, and resume a flow mid-way — proven on BharatBank, a fictional digital bank we built to demo it, and shown above with real screenshots and a real recording.",
+    q: "What can it do today?",
+    a: "It can navigate, press, scroll, explain a screen, and resume a flow partway through. That is shown on BharatBank, a fictional bank, in the recording and screens above.",
   },
   {
-    q: "Will it ever touch my balance or OTP?",
-    a: "Never. Guardrailed by design — balance, OTP, PAN and account secrets are off-limits, no matter how far execution grows.",
+    q: "Will it touch a balance or an OTP?",
+    a: "No. Balance, OTP, PAN, and account secrets are refused, even if the rest of the task is allowed.",
   },
   {
     q: "How is this different from a chatbot?",
-    a: "A chatbot answers where to go. Saarthi goes there itself — it taps, scrolls and opens the right screen on the user's behalf.",
+    a: "A chatbot tells someone where to go. Saarthi opens the screen and does the step.",
   },
   {
-    q: "Is this live anywhere yet?",
-    a: "It's proven on BharatBank, our live fictional-bank demo, and we're in early conversations with B2B SaaS companies about running real pilots.",
+    q: "Is this live with real customers?",
+    a: "The public proof is BharatBank, a fictional bank you can try. Pilots with other companies are still early conversations.",
+  },
+  {
+    q: "What do you need for a pilot on my product?",
+    a: "A map of your screens and controls. The public demo does not require that. Write to hello@companion.py if you want to talk about a pilot.",
+  },
+  {
+    q: "Is BharatBank a real bank?",
+    a: "No. It is a fictional demo. No real money moves.",
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-full">
-      <header className="border-b" style={{ borderColor: "var(--border)" }}>
-        <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 py-5">
-          <span className="flex items-center gap-2 text-base font-bold tracking-tight">
-            <span
-              className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold text-white"
-              style={{ background: "var(--maroon)" }}
-            >
-              S
-            </span>
-            Saarthi
-          </span>
-          <div className="hidden sm:flex items-center gap-8 text-sm" style={{ color: "var(--muted)" }}>
-            {NAV_LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="hover:opacity-70 transition-opacity">
-                {l.label}
-              </a>
-            ))}
-          </div>
-          <a
-            href="#contact"
-            className="text-sm font-semibold px-5 py-2.5 rounded-full text-white"
-            style={{ background: "var(--maroon)" }}
-          >
-            Get in touch
-          </a>
-        </nav>
-      </header>
-
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="px-6 pt-16 sm:pt-20 pb-10 text-center">
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.08] max-w-3xl mx-auto">
-            <span style={{ color: "var(--foreground)" }}>Acts inside your product,</span>
+    <>
+      <Header />
+      <main id="content" className="flex-1">
+        <section className="px-6 pt-24 pb-16 text-center">
+          <h1 className="heading-1 heading-gradient measure mx-auto">
+            Acts in the product
             <br />
-            <span style={{ color: "var(--muted)" }}>not just around it.</span>
+            not beside it
           </h1>
-          <p className="mt-6 text-lg leading-relaxed max-w-xl mx-auto" style={{ color: "var(--muted)" }}>
-            Saarthi reads a business&apos;s own screens and controls, then operates them
-            directly — no screenshots, no visual guessing, with voice built in natively on
-            Bolna.
+          <p className="body-2 measure mx-auto mt-6 text-[var(--muted)]">
+            Saarthi is a voice agent for product teams.
+            <br />
+            It reads a map of your screens and presses the real controls.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#contact"
-              className="px-6 py-3 rounded-full font-semibold text-white"
-              style={{ background: "var(--maroon)" }}
-            >
-              Get in touch
-            </a>
-            <a
-              href="#demo"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold border"
-              style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
-            >
-              Watch the demo
-              <IconArrowOpen className="w-4 h-4" />
-            </a>
+          <div className="mt-6">
+            <DemoLink size="md" />
           </div>
+          <p className="caption-2 mx-auto mt-4 max-w-sm text-[var(--muted)]">
+            Shown on BharatBank, a fictional bank built to prove the mechanism.
+          </p>
         </section>
 
-        {/* Hero showcase: real demo video flanked by real screenshots */}
-        <section className="px-6 pb-20" style={{ background: "var(--surface)" }}>
-          <div className="mx-auto max-w-4xl pt-14 flex items-end justify-center">
+        <section className="overflow-x-clip bg-[var(--surface)] px-6 pb-16">
+          <div className="mx-auto flex max-w-4xl items-end justify-center pt-16">
             <Image
               src="/screenshots/bharatbank-loans.jpg"
-              alt="BharatBank loans screen"
+              alt=""
               width={780}
               height={1688}
-              className="phone-frame w-[150px] sm:w-[210px] h-auto -mr-6 sm:-mr-10 mb-10 hidden sm:block"
+              priority
+              className="phone-frame mb-10 hidden h-auto w-52 -mr-8 md:block"
               style={{ transform: "rotate(-6deg)" }}
             />
-            <DemoVideo
-              src="/media/saarthi-demo.mp4"
-              poster="/media/demo-poster.jpg"
-              className="w-[220px] sm:w-[280px] z-10"
-            />
+            <DemoVideo src="/media/saarthi-demo.mp4" poster="/media/demo-poster.jpg" className="z-10 w-56" />
             <Image
               src="/screenshots/bharatbank-dashboard.jpg"
-              alt="BharatBank dashboard screen"
+              alt=""
               width={780}
               height={1688}
-              className="phone-frame w-[150px] sm:w-[210px] h-auto -ml-6 sm:-ml-10 mb-10 hidden sm:block"
+              className="phone-frame mb-10 hidden h-auto w-52 -ml-8 md:block"
               style={{ transform: "rotate(6deg)" }}
             />
           </div>
-          <p className="text-center text-sm mt-4" style={{ color: "var(--muted)" }}>
-            A real recording of Saarthi driving{" "}
-            <a
-              href="https://bharat-bank.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold underline"
-              style={{ color: "var(--maroon)" }}
-            >
-              BharatBank
-            </a>
-            , a fictional digital bank — try it yourself.
+          <p className="caption-2 mx-auto mt-6 max-w-md text-center text-[var(--muted)]">
+            A real recording of Saarthi driving BharatBank. The side images are real screens from that demo.
           </p>
         </section>
 
-        {/* The real problem */}
-        <section className="py-12 border-b" style={{ borderColor: "var(--border)" }}>
-          <div className="mx-auto max-w-3xl px-6 text-center">
-            <p
-              className="text-xs font-bold uppercase tracking-widest mb-3"
-              style={{ color: "var(--gold-dark)" }}
-            >
-              The real problem
-            </p>
-            <p className="text-xl sm:text-2xl font-semibold leading-snug" style={{ color: "var(--foreground)" }}>
-              A 6-step flow that keeps 90% of users at every step finishes at only{" "}
-              <span style={{ color: "var(--maroon)" }}>≈53%</span> — not because any single
-              step is broken.
-            </p>
-          </div>
-        </section>
-
-        {/* Problem moments */}
-        <section id="problem" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="text-3xl font-extrabold mb-3" style={{ color: "var(--foreground)" }}>
-            One cost, paid three times
-          </h2>
-          <p className="max-w-2xl mb-10" style={{ color: "var(--muted)" }}>
-            Every digital product — an internal dashboard or a public website — pays a hidden
-            tax on complexity. Chatbots and tooltips only describe where to go; the user still
-            has to find the control and operate it themselves.
-          </p>
-          <div className="grid sm:grid-cols-3 gap-5">
-            {PROBLEM_MOMENTS.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-2xl p-6 border"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-              >
-                <Icon className="w-7 h-7 mb-4" style={{ color: "var(--maroon)" }} />
-                <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {body}
-                </p>
+        <section className="section-anchor px-6 py-20" id="problem">
+          <Reveal>
+            <div className="mx-auto max-w-5xl">
+              <h2 className="heading-4 measure">
+                Keep 9 in 10 people at each of six steps, and about 53 in 100 finish.
+              </h2>
+              <p className="caption-2 mt-4 max-w-xl text-[var(--muted)]">
+                That is the math of nine tenths, six times in a row. It is not a measured customer result, and it is not one broken button.
+              </p>
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {PROBLEMS.map(({ icon: Icon, title, body }) => (
+                  <article key={title} className="card p-6">
+                    <Icon size={24} color="var(--accent)" />
+                    <h3 className="title-3 mt-4">{title}</h3>
+                    <p className="body-6 mt-2 text-[var(--muted)]">{body}</p>
+                  </article>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* How it works */}
-        <section className="py-20" style={{ background: "var(--surface)" }}>
-          <div className="mx-auto max-w-5xl px-6">
-            <h2 className="text-3xl font-extrabold mb-10" style={{ color: "var(--foreground)" }}>
-              How Saarthi is different
-            </h2>
-            <div className="grid sm:grid-cols-3 gap-5">
-              {HOW_IT_WORKS.map(({ icon: Icon, title, body }) => (
-                <div
-                  key={title}
-                  className="rounded-2xl p-6 border"
-                  style={{ borderColor: "var(--border)", background: "var(--background)" }}
-                >
-                  <Icon className="w-7 h-7 mb-4" style={{ color: "var(--maroon)" }} />
-                  <h3 className="font-bold mb-1.5" style={{ color: "var(--foreground)" }}>
-                    {title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                    {body}
-                  </p>
-                </div>
-              ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
-        {/* See it in action: real screenshots, alternating */}
-        <section id="demo" className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="text-3xl font-extrabold mb-3" style={{ color: "var(--foreground)" }}>
-            See it in action
-          </h2>
-          <p className="max-w-2xl mb-6" style={{ color: "var(--muted)" }}>
-            Not a mockup — this is Saarthi running on BharatBank, a fictional digital bank we
-            built to prove the mechanism end to end.
-          </p>
-          <a
-            href="https://bharat-bank.onrender.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mb-10 text-sm font-semibold px-5 py-2.5 rounded-full text-white"
-            style={{ background: "var(--maroon)" }}
-          >
-            Try the live demo
-            <IconArrowOpen className="w-4 h-4" />
-          </a>
-
-          <div className="flex flex-col gap-16 sm:gap-20">
-            {SHOWCASE.map(({ icon: Icon, tag, title, body, shot }, i) => (
-              <div key={title} className="grid sm:grid-cols-2 gap-10 items-center">
-                <div className={i % 2 === 1 ? "sm:order-2" : ""}>
-                  <p
-                    className="text-xs font-bold uppercase tracking-widest mb-3"
-                    style={{ color: "var(--gold-dark)" }}
-                  >
-                    {tag}
-                  </p>
-                  <Icon className="w-7 h-7 mb-4" style={{ color: "var(--maroon)" }} />
-                  <h3 className="text-2xl font-bold mb-3" style={{ color: "var(--foreground)" }}>
-                    {title}
-                  </h3>
-                  <p className="leading-relaxed" style={{ color: "var(--muted)" }}>
-                    {body}
-                  </p>
-                </div>
-                <Image
-                  src={shot}
-                  alt={`BharatBank — ${title}`}
-                  width={780}
-                  height={1688}
-                  className="phone-frame w-full h-auto max-w-[260px] mx-auto"
-                />
+        <section className="bg-[var(--surface)] px-6 py-20">
+          <Reveal>
+            <div className="mx-auto max-w-5xl">
+              <h2 className="heading-2">What changes for the person in the app</h2>
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
+                {BENEFITS.map((item) => (
+                  <article key={item.title} className="card bg-[var(--background)] p-6">
+                    <h3 className="title-1">{item.title}</h3>
+                    <p className="body-3 mt-3 text-[var(--muted)]">{item.body}</p>
+                  </article>
+                ))}
               </div>
-            ))}
-          </div>
-
-          <div
-            className="mt-16 rounded-2xl p-5 flex items-start gap-3 border"
-            style={{ background: "rgba(234,179,8,0.08)", borderColor: "rgba(234,179,8,0.3)" }}
-          >
-            <IconShield className="w-6 h-6 shrink-0 mt-0.5" style={{ color: "var(--gold-dark)" }} />
-            <p className="text-sm leading-relaxed" style={{ color: "var(--foreground)" }}>
-              Guardrailed by design: Saarthi can click, scroll and navigate for a user — but it
-              will never read or act on their balance, OTP, or account secrets.
-            </p>
-          </div>
+            </div>
+          </Reveal>
         </section>
 
-        {/* FAQ */}
-        <section id="faq" className="py-20" style={{ background: "var(--surface)" }}>
-          <div className="mx-auto max-w-3xl px-6">
-            <h2 className="text-3xl font-extrabold mb-10" style={{ color: "var(--foreground)" }}>
-              A few answers, before you ask
-            </h2>
-            <div className="flex flex-col">
-              {FAQS.map(({ q, a }) => (
-                <details key={q} className="faq-item border-b py-5" style={{ borderColor: "var(--border)" }}>
-                  <summary
-                    className="flex items-center justify-between gap-4 font-bold"
-                    style={{ color: "var(--foreground)" }}
-                  >
-                    {q}
-                    <span className="faq-icon shrink-0 text-xl leading-none" style={{ color: "var(--maroon)" }}>
+        <Tagline />
+
+        <section className="section-anchor px-6 py-20" id="how">
+          <Reveal>
+            <div className="mx-auto max-w-5xl">
+              <h2 className="heading-2">How it works</h2>
+              <ol className="mt-10 grid gap-6 md:grid-cols-3">
+                {STEPS.map(({ icon: Icon, title, body }, index) => (
+                  <li key={title} className="card p-6">
+                    <p className="caption-3 text-[var(--gold)]">Step {index + 1}</p>
+                    <Icon size={24} color="var(--accent)" className="mt-4" />
+                    <h3 className="title-3 mt-4">{title}</h3>
+                    <p className="body-6 mt-2 text-[var(--muted)]">{body}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="section-anchor bg-[var(--surface)] px-6 py-20" id="proof">
+          <Reveal>
+            <div className="mx-auto max-w-5xl">
+              <h2 className="heading-2">Seen on BharatBank</h2>
+              <p className="body-3 mt-4 max-w-xl text-[var(--muted)]">
+                Not a mockup. These are real screens and a real recording from the fictional bank.
+              </p>
+              <div className="mt-6">
+                <DemoLink size="md" />
+              </div>
+              <div className="mt-16 flex flex-col gap-16">
+                {PROOF.map(({ icon: Icon, tag, title, body, shot, alt }, index) => (
+                  <article key={title} className="grid items-center gap-8 md:grid-cols-2">
+                    <div className={index % 2 === 1 ? "md:order-2" : ""}>
+                      <p className="caption-3 text-[var(--gold)]">{tag}</p>
+                      <Icon size={24} color="var(--accent)" className="mt-4" />
+                      <h3 className="heading-5 mt-4">{title}</h3>
+                      <p className="body-3 mt-3 text-[var(--muted)]">{body}</p>
+                    </div>
+                    <Image
+                      src={shot}
+                      alt={alt}
+                      width={780}
+                      height={1688}
+                      className="phone-frame mx-auto h-auto w-full max-w-60"
+                    />
+                  </article>
+                ))}
+              </div>
+              <aside className="card mt-16 flex items-start gap-4 p-6">
+                <ShieldCheck size={24} color="var(--gold)" className="shrink-0" />
+                <p className="body-6">
+                  Saarthi can move through the app. It will not read or submit a balance, an OTP, a PAN, or an account secret.
+                </p>
+              </aside>
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="section-anchor px-6 py-20" id="faq">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="heading-2">Questions</h2>
+            <div className="mt-10 flex flex-col gap-3">
+              {FAQS.map((item) => (
+                <details key={item.q} className="card px-4 py-4">
+                  <summary className="title-3 flex items-center justify-between gap-4">
+                    {item.q}
+                    <span className="faq-icon caption-3 text-[var(--accent)]" aria-hidden>
                       +
                     </span>
                   </summary>
-                  <p className="text-sm leading-relaxed mt-3" style={{ color: "var(--muted)" }}>
-                    {a}
-                  </p>
+                  <p className="body-6 mt-3 text-[var(--muted)]">{item.a}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Contact CTA */}
-        <section id="contact" className="px-3 sm:px-6 py-16">
-          <div
-            className="mx-auto max-w-5xl rounded-[28px] p-10 sm:p-14 text-center"
-            style={{ background: "var(--dark-panel)" }}
-          >
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "var(--gold)" }}>
-              Saarthi × companion.py
+        <section className="px-6 py-16">
+          <div className="mx-auto max-w-5xl rounded-3xl px-6 py-16 text-center" style={{ background: "var(--panel)", color: "var(--panel-text)" }}>
+            <p className="caption-3" style={{ color: "var(--gold)" }}>
+              Saarthi by companion.py
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-white">
-              Bring Saarthi to your product.
+            <h2 className="heading-3 mt-4">
+              See it run
+              <br />
+              on a full bank app
             </h2>
-            <p className="text-base mb-8 max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.68)" }}>
-              Hand us a map of your screens — we&apos;ll show you a voice agent that acts on
-              them, not just talks about them.
+            <p className="body-3 mx-auto mt-4 max-w-md" style={{ color: "var(--panel-muted)" }}>
+              BharatBank is fictional. You can open it and watch Saarthi operate the screens.
             </p>
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <EqualizerBars className="text-[var(--gold)]" />
-              <span className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-                Now accepting early pilots
-              </span>
+            <div className="mt-8">
+              <DemoLink size="md" />
             </div>
-            <a
-              href="mailto:hello@companion.py?subject=Saarthi%20pilot"
-              className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full"
-              style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
-            >
-              Request a pilot
-              <IconArrowOpen className="w-4 h-4" />
-            </a>
           </div>
         </section>
       </main>
-
-      <footer className="pt-16 pb-8" style={{ background: "var(--dark-panel)" }}>
-        <div className="mx-auto max-w-6xl px-6 sm:px-10">
-          <p className="text-xl sm:text-2xl font-semibold mb-12 max-w-xl" style={{ color: "var(--gold)" }}>
-            Built for Bharat&apos;s next billion screens.
-          </p>
-
-          <div
-            className="grid sm:grid-cols-[2fr_1fr_1fr] gap-10 pb-10 border-b"
-            style={{ borderColor: "rgba(255,255,255,0.1)" }}
-          >
-            <div>
-              <span className="flex items-center gap-2 text-base font-bold tracking-tight mb-3 text-white">
-                <span
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold"
-                  style={{ background: "var(--gold)", color: "var(--maroon-dark)" }}
-                >
-                  S
-                </span>
-                Saarthi
-              </span>
-              <p className="text-sm leading-relaxed max-w-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-                A voice agent by companion.py that reads a business&apos;s own screens and acts
-                on them directly — built natively on Bolna&apos;s voice infrastructure.
-              </p>
-            </div>
-
-            <div>
-              <p
-                className="text-xs font-bold uppercase tracking-widest mb-4"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-              >
-                Product
-              </p>
-              <ul className="flex flex-col gap-2 text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
-                {NAV_LINKS.map((l) => (
-                  <li key={l.href}>
-                    <a href={l.href} className="hover:text-white transition-colors">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a
-                    href="https://bharat-bank.onrender.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
-                  >
-                    Live demo
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p
-                className="text-xs font-bold uppercase tracking-widest mb-4"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-              >
-                Contact
-              </p>
-              <ul className="flex flex-col gap-2 text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
-                <li>
-                  <a href="#contact" className="hover:text-white transition-colors">
-                    Request a pilot
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:hello@companion.py" className="hover:text-white transition-colors">
-                    hello@companion.py
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
-              © 2026 companion.py. All rights reserved.
-            </span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
-              Saarthi — built natively on Bolna voice infrastructure
-            </span>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <Footer />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    </>
   );
 }
